@@ -32,6 +32,17 @@ http://postgresql.org/download/
 2) Create new database with name 'db_4_friends'
 3) In the terminal run 'py create_db.py'
 
+### Starting Postgres Server on Windows
+Find the PostgreSQL database directory.
+```
+pg_ctl -D "C:\Program Files\PostgreSQL\17\data" start
+```
+
+### Stopping Postgres Server on Windows
+```
+pg_ctl -D "C:\Program Files\PostgreSQL\17\data" stop
+```
+
 ## Debugging
 
 <details>
@@ -41,5 +52,11 @@ http://postgresql.org/download/
 
 <details>
     <summary> ModuleNotFoundError: No module named 'psycopg2'</summary>
-    pip install psycopg2
+    Run pip install psycopg2
+</details>
+
+<details>
+    <summary> pg_ctl command is not found or recognized</summary>
+    Setup up Postgres bin directory's path in environment variables. For Example:
+    'C:\Program Files\PostgreSQL\17\bin'
 </details>

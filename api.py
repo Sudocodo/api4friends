@@ -7,7 +7,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:password@localhos
 db = SQLAlchemy(app)
 api = Api(app)
 
-class User(db.Model):
+class UserModel(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), unique=True, nullable=False)
@@ -19,6 +19,31 @@ class User(db.Model):
 
     def __repr__(self):
         return f'<User(name = {self.name}, email = {self.email})>'
+    
+user_args = reqparse.RequestParser()
+user_args.add_argument('name', type=str, required=True, help='Name of the user')
+user_args.add_argument('email', type=str, required=True, help='Email of the user')
+
+userFields = {
+    'id': fields.Integer,
+    'name': fields.String,
+    'email': fields.String
+}
+
+class Users(Resource):
+    @marshal_with(userFields) #decorator to format the output
+    def get(self, user_id):
+        return UserModel.query.all()
+
+    @marshal_with(userFields)
+    def post(self):
+        args = user_args.parse_args()
+        new_user = UserModel(name=args['name'], email=args['email'])
+        db.session.add(new_user)
+        db.session.commit()
+        return new_user, 201
+
+api.add_resource(Users, 'api/users/')
 
 @app.route('/')
 def home():
