@@ -37,6 +37,11 @@ http://postgresql.org/download/
 py create_db.py
 ```
 
+### Add seed data
+```
+python seed_data.py
+```
+
 ### Starting Postgres Server on Windows
 Find the PostgreSQL database directory.
 ```
@@ -52,6 +57,16 @@ pg_ctl -D "C:\Program Files\PostgreSQL\17\data" stop
 
 ```
 source .venv/Scripts/activate
+```
+
+## Testing API
+Can test with curl
+```
+curl http://localhost:5000/api/users/
+curl http://localhost:5000/api/users/1
+
+curl http://localhost:5000/api/recipes/
+curl http://localhost:5000/api/recipes/1
 ```
 
 ## Debugging

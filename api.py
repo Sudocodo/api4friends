@@ -12,7 +12,8 @@ api = Api(app)
 
 api.add_resource(Users, '/api/users/<int:user_id>')
 api.add_resource(UsersAll, '/api/users/')
-api.add_resource(Recipes, '/api/recipes/')
+api.add_resource(Recipes, '/api/recipes/<int:recipe_id>', endpoint='recipe_by_id')
+api.add_resource(Recipes, '/api/recipes/', endpoint='recipes_all')
 
 @app.route('/')
 def home():

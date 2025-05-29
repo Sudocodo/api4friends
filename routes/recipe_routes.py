@@ -16,6 +16,11 @@ recipeFields = {
 class Recipes(Resource):
     @marshal_with(recipeFields)
     def get(self, recipe_id=None):
+        if recipe_id is not None:
+            recipe = RecipeModel.query.filter_by(id=recipe_id).first()
+            if not recipe:
+                return {'message': 'Recipe not found'}, 404
+            return recipe
         return RecipeModel.query.all()
 
     @marshal_with(recipeFields)
