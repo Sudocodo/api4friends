@@ -27,10 +27,15 @@ Default server http://127.0.0.1:5000
 ### If running db locally, install PostgreSQL:
 http://postgresql.org/download/
 
-### Create db
+### Create DB
 1) Open pgAdmin 4
 2) Create new database with name 'db_4_friends'
-3) In the terminal run 'py create_db.py'
+
+### Updating DB (also do this for new models)
+3) In the terminal run
+```
+py create_db.py
+```
 
 ### Starting Postgres Server on Windows
 Find the PostgreSQL database directory.
@@ -41,6 +46,12 @@ pg_ctl -D "C:\Program Files\PostgreSQL\17\data" start
 ### Stopping Postgres Server on Windows
 ```
 pg_ctl -D "C:\Program Files\PostgreSQL\17\data" stop
+```
+
+### Remember to always start virtual env:
+
+```
+source .venv/Scripts/activate
 ```
 
 ## Debugging
